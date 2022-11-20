@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Bloxi</title>
+		<style>
+			body {
+				text-align: center;
+				color: white;
+				background-color: #8B0000;
+				font-family: sans-serif;
+			}
+			
+			input {
+				padding: 5px 8px;
+			}
+			
+			a {
+				color: #00FFFF;
+				font-size: 24px;
+				display: block;
+				margin: 16px 0px;
+			}
+
+            input {
+                border: solid 3px #FFA500;
+                background-color: #00FF00;
+                color: #ffffff;
+                outline: none;
+            }
+
+            #go:hover {
+                background-color: #333333;
+            }
+		</style>
+	</head>
+	<body>
+		<h1>Bloxi Proxi</h1>
+    <p>Using Corrision made by yx4rmath</p>
+		<input id="url" name="url" placeholder="Enter Url">
+		<input id="go" type="submit" value="Go">
+		<script>
+			function xor(str) {
+				return encodeURIComponent(str.toString().split('').map((char, ind) => ind % 2 ? String.fromCharCode(char.charCodeAt() ^ 2) : char).join(''));
+			}
+			
+			var prUrl = document.getElementById("url"),
+			prGo = document.getElementById("go");
+			
+			function go(url) {
+				window.location.href = "c/" + xor(/^(http:\/\/|https:\/\/)/i.test(url) ? url : "https://" + url);
+			}
+			
+			prUrl.addEventListener("keydown", function(e) {
+				if (e.code == "Enter" && prUrl.value) go(prUrl.value);
+			}, false);
+			
+			prGo.addEventListener("click", function() {
+				if (prUrl.value) go(prUrl.value);
+			}, false);
+		</script>
+	</body>
+</html>
